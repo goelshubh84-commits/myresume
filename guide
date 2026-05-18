@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Design Prompt Engineering Guide</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a202c;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            background-color: #f0fdf4; /* Soft background tint inspired by your image */
+        }
+        h1 {
+            color: #064e3b;
+            border-bottom: 3px solid #a3e635;
+            padding-bottom: 12px;
+            font-size: 2.2em;
+        }
+        h2 {
+            color: #065f46;
+            margin-top: 40px;
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 8px;
+        }
+        h3 {
+            color: #0f766e;
+            margin-top: 25px;
+        }
+        p, li {
+            font-size: 1.05em;
+        }
+        code {
+            font-family: "Courier New", Courier, monospace;
+            background-color: #e2e8f0;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #0f172a;
+        }
+        .palette-container {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .color-swatch {
+            flex: 1;
+            min-width: 120px;
+            height: 80px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 10px;
+            font-size: 0.85em;
+            font-weight: bold;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .prompt-container {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 6px solid #a3e635;
+        }
+        .prompt-header {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .ui-prompt { border-left-color: #065f46; }
+        .midjourney-prompt { border-left-color: #a3e635; }
+        
+        .prompt-text {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: inherit;
+            white-space: pre-line;
+            color: #334155;
+            margin-top: 8px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Visual Design Prompt Guide: "Neo-Medical Organic"</h1>
+    <p>Based on the image you uploaded, your preferred aesthetic is a modern, high-end evolution of UI design often called <strong>Neo-Organic Minimalism</strong> or <strong>Clean Tech-Wellness</strong>. It abandons traditional, sterile medical blues in favor of warm, inviting earth tones and fluid, asymmetrical geometry.</p>
+    
+    <p>This guide translates that exact visual theme into precise prompt tokens and structures for LLMs (like Gemini/GPT for UI generation/coding) and image generators (like Midjourney/Stable Diffusion).</p>
+
+    <hr>
+
+    <h2>1. Deconstructing the Aesthetic Palette</h2>
+    <p>To replicate this theme perfectly, you must explicitly pass this exact color profile and layout logic to the AI.</p>
+    
+    <div class="palette-container">
+        <div class="color-swatch" style="background-color: #dcfce7; color: #14532d;">Sage/Mint Tint<br>#DCFCE7</div>
+        <div class="color-swatch" style="background-color: #a3e635; color: #14532d;">Acid Lime/Volt<br>#A3E635</div>
+        <div class="color-swatch" style="background-color: #064e3b; color: #ffffff;">Deep Forest Green<br>#064E3B</div>
+        <div class="color-swatch" style="background-color: #fef08a; color: #713f12;">Soft Pastel Yellow<br>#FEF08A</div>
+        <div class="color-swatch" style="background-color: #e9d5ff; color: #581c87;">Muted Lavender<br>#E9D5FF</div>
+    </div>
+
+    <h3>Core Design Rules Observed in Your Image:</h3>
+    <ul>
+        <li><strong>Hyper-Rounded Geometry:</strong> Notice the extreme border-radii on the cards and image containers (roughly <code>24px</code> to <code>32px</code>), giving it a friendly, fluid, pill-like feel.</li>
+        <li><strong>Asymmetrical Grid Bento Layout:</strong> Content blocks are packed together tightly like a Bento Box, using varying heights and widths instead of a strict uniform grid.</li>
+        <li><strong>High Contrast Accents:</strong> Using an aggressive, high-energy neon "Volt" green/yellow for high-priority interactive components (CTA buttons, login states, active tabs) paired against clean, dark typography.</li>
+    </ul>
+
+    <hr>
+
+    <h2>2. Prompts for UI/UX & Code Generation (HTML/CSS/Tailwind)</h2>
+    <p>When asking an AI to generate mockups, web components, or layout structures matching this uploaded theme, use this template:</p>
+
+    <div class="prompt-container ui-prompt">
+        <div class="prompt-header" style="color: #065f46;">Target: Code & Layout Generation</div>
+        <strong>System Role & Context:</strong>
+        <div class="prompt-text">
+            Act as an elite UI/UX engineer specializing in Neo-Organic minimalism and high-end wellness tech branding. 
+            
+            Generate the [HTML/Tailwind/React component] for a [Specify Page, e.g., User Dashboard / Landing Page Hero] using the following strict design tokens:
+            
+            1. Layout: Bento-box grid architecture with asymmetrical container sizing. 
+            2. Geometry: Hyper-rounded corners (border-radius: 28px), clean negative space, completely flat design elements with absolutely zero harsh drop-shadows.
+            3. Color Palette: 
+               - Base Background: Ultramated soft mint/sage tint (#F0FDF4)
+               - High-Contrast Accents (CTAs, Badges): Electric Lime/Volt (#A3E635)
+               - Primary Containers & Text: Rich Deep Forest Green (#064E3B)
+               - Accent Containers: Soft pastel yellow and pale lavender to differentiate categories.
+            4. Typography: Modern sans-serif, high weight contrast (bold headers, highly legible, clean tracking line-heights).
+            
+            Ensure the responsive mobile layout collapses smoothly into a stacked card deck style with a persistent curved bottom utility bar.
+        </div>
+    </div>
+
+    <hr>
+
+    <h2>3. Prompts for Image Generation (Midjourney / Stable Diffusion)</h2>
+    <p>If you need to generate images, illustrations, or mockups that look exactly like the photography or interface cards inside your reference image, use this style syntax:</p>
+
+    <div class="prompt-container midjourney-prompt">
+        <div class="prompt-header" style="color: #4d7c0f;">Target: Midjourney v6 / AI Image Models</div>
+        <strong>UI Mockup Presentation Prompt:</strong>
+        <div class="prompt-text">
+            A clean app UI design presentation mockup, healthcare and wellness application, displayed on a modern smartphone screen held by a hand, side-by-side with a desktop website viewport display. Clean bento grid layout, asymmetrical rounded modules, pastel sage background, deep forest green elements, striking bright volt accents. Minimalist vector details, premium corporate identity, soft studio lighting, commercial tech aesthetic --ar 4:3 --v 6.0
+        </div>
+        
+        <strong style="margin-top: 15px; display: inline-block;">Custom Asset/Photography Prompt (The Medical Staff Style):</strong>
+        <div class="prompt-text">
+            Studio commercial portrait of a friendly female healthcare professional wearing medical scrubs, smiling warmly, solid soft sage-green background, hyper-clean lighting, modern minimalist medical branding aesthetic, commercial lifestyle photography, corporate wellness look --ar 1:1
+        </div>
+    </div>
+
+    <hr>
+
+    <h2>4. Quick Token Cheat-Sheet</h2>
+    <p>Whenever you are typing a quick prompt and want to evoke this specific look without writing a massive script, sprinkle these keywords into your prompt:</p>
