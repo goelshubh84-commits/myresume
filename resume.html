@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shubh Goel — Resume</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050a12;
+    --bg2: #080f1c;
+    --bg3: #0d1829;
+    --panel: rgba(255,255,255,0.03);
+    --panel-border: rgba(0,210,255,0.12);
+    --cyan: #00d2ff;
+    --cyan-dim: rgba(0,210,255,0.18);
+    --cyan-glow: rgba(0,210,255,0.07);
+    --teal: #00ffc8;
+    --teal-dim: rgba(0,255,200,0.12);
+    --gold: #ffd700;
+    --gold-dim: rgba(255,215,0,0.12);
+    --text: #e8f4ff;
+    --text-muted: #6a8aaa;
+    --text-dim: #3a5570;
+    --accent-line: rgba(0,210,255,0.3);
+    --grid: rgba(0,210,255,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Ambient glow blobs */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -20vh;
+    left: -10vw;
+    width: 60vw;
+    height: 60vh;
+    background: radial-gradient(ellipse, rgba(0,100,180,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .glow-blob {
+    position: fixed;
+    bottom: -15vh;
+    right: -10vw;
+    width: 50vw;
+    height: 50vh;
+    background: radial-gradient(ellipse, rgba(0,180,120,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 40px;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: start;
+    margin-bottom: 48px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--panel-border);
+    position: relative;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 120px;
+    height: 2px;
+    background: var(--cyan);
+  }
+
+  .name-block { }
+
+  .name-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--cyan);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .name-label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--cyan);
+  }
+
+  h1 {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg, #ffffff 0%, #a8d8f0 50%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+
+  .tagline {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
+  .contact-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+    padding-top: 8px;
+    min-width: 200px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    transition: color 0.2s;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-item:hover { color: var(--cyan); }
+
+  .contact-icon {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--panel);
+    flex-shrink: 0;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .contact-item:hover .contact-icon {
+    border-color: var(--cyan);
+    background: var(--cyan-dim);
+  }
+
+  .contact-icon svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+  /* ─── STATUS BADGES ─── */
+  .badges {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 44px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid var(--panel-border);
+    border-radius: 40px;
+    background: var(--panel);
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    animation: pulse 2.5s infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .badge-dot.gold { background: var(--gold); }
+  .badge-dot.cyan { background: var(--cyan); }
+
+  /* ─── LAYOUT ─── */
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 32px;
+    align-items: start;
+  }
+
+  /* ─── SECTION ─── */
+  .section { margin-bottom: 40px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--cyan);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--accent-line), transparent);
+  }
+
+  /* ─── ENTRY CARDS ─── */
+  .entry {
+    position: relative;
+    padding: 20px 22px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    transition: border-color 0.25s, background 0.25s;
+  }
+
+  .entry:hover {
+    border-color: rgba(0,210,255,0.28);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .entry::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;
+    bottom: 20%;
+    width: 2px;
+    background: var(--cyan);
+    border-radius: 0 2px 2px 0;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .entry:hover::before { opacity: 1; }
+
+  .entry-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 4px;
+  }
+
+  .entry-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .entry-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    padding-top: 2px;
+    letter-spacing: 0.5px;
+  }
+
+  .entry-org {
+    font-size: 12px;
+    color: var(--cyan);
+    margin-bottom: 12px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+
+  .entry-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .entry-bullets li {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .entry-bullets li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--cyan);
+    font-weight: 700;
+  }
+
+  /* ─── PROJECT CARDS ─── */
+  .project-card {
+    padding: 20px 22px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    transition: border-color 0.25s, background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(ellipse at top right, var(--cyan-glow), transparent 70%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .project-card:hover::after { opacity: 1; }
+  .project-card:hover {
+    border-color: rgba(0,210,255,0.28);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    gap: 12px;
+  }
+
+  .project-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .project-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--teal);
+    border: 1px solid rgba(0,255,200,0.25);
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: rgba(0,255,200,0.06);
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .project-audience {
+    font-size: 12px;
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {}
+
+  .sidebar-section { margin-bottom: 32px; }
+
+  /* ─── SKILLS ─── */
+  .skill-group { margin-bottom: 16px; }
+
+  .skill-group-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .skill-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-muted);
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 5px;
+    padding: 4px 10px;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    cursor: default;
+  }
+
+  .chip:hover {
+    color: var(--cyan);
+    border-color: rgba(0,210,255,0.35);
+    background: var(--cyan-dim);
+  }
+
+  .chip.highlight {
+    color: var(--teal);
+    border-color: rgba(0,255,200,0.25);
+    background: rgba(0,255,200,0.06);
+  }
+
+  /* ─── STAT CARDS ─── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .stat-card {
+    padding: 14px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--cyan);
+    line-height: 1;
+    margin-bottom: 4px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  /* ─── MINI SECTION in sidebar ─── */
+  .sidebar-entry {
+    padding: 14px 16px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: border-color 0.2s;
+  }
+
+  .sidebar-entry:hover { border-color: rgba(0,210,255,0.25); }
+
+  .sidebar-entry-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .sidebar-entry-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 1px;
+  }
+
+  .sidebar-entry-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+  }
+
+  /* ─── PRINT ─── */
+  @media print {
+    body { background: #fff; color: #000; }
+    body::before, body::after, .glow-blob { display: none; }
+    .entry, .project-card, .sidebar-entry, .stat-card {
+      border: 1px solid #ddd;
+      background: #fafafa;
+    }
+    h1 { -webkit-text-fill-color: #000; color: #000; }
+    .name-label, .section-tag, .entry-org, .entry-date, .chip,
+    .stat-number, .contact-item, .badge { color: #444; }
+    .badge-dot, .section-line { display: none; }
+  }
+
+  @media (max-width: 720px) {
+    .layout { grid-template-columns: 1fr; }
+    .header { grid-template-columns: 1fr; }
+    .contact-block { align-items: flex-start; }
+    h1 { font-size: 44px; }
+    .container { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="glow-blob"></div>
+<div class="container">
+
+  <!-- ─── HEADER ─── -->
+  <header class="header">
+    <div class="name-block">
+      <div class="name-label">Resume · 2026</div>
+      <h1>SHUBH<br>GOEL</h1>
+      <p class="tagline">Capital Markets · Equity Research · Financial Modelling<br>Gurugram, India</p>
+    </div>
+    <div class="contact-block">
+      <a href="tel:+917817940285" class="contact-item">
+        <span class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 010 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+        </span>
+        +91 78179 40285
+      </a>
+      <a href="mailto:Connect.shubhgoel@gmail.com" class="contact-item">
+        <span class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </span>
+        Connect.shubhgoel@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/shubh-goel-connect" target="_blank" class="contact-item">
+        <span class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </span>
+        shubh-goel-connect
+      </a>
+    </div>
+  </header>
+
+  <!-- ─── STATUS BADGES ─── -->
+  <div class="badges">
+    <div class="badge"><span class="badge-dot"></span>PG — Capital Markets &amp; Trading, Masters' Union</div>
+    <div class="badge"><span class="badge-dot gold"></span>Equity Research Fellow</div>
+    <div class="badge"><span class="badge-dot cyan"></span>Bloomberg Terminal Certified</div>
+    <div class="badge"><span class="badge-dot"></span>Open to Opportunities</div>
+  </div>
+
+  <!-- ─── MAIN LAYOUT ─── -->
+  <div class="layout">
+
+    <!-- LEFT COLUMN -->
+    <div class="main-col">
+
+      <!-- EDUCATION -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-tag">// Education</span>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-top">
+            <div class="entry-title">Post Graduate — Capital Markets &amp; Trading</div>
+            <div class="entry-date">Sept 2025 – Aug 2026</div>
+          </div>
+          <div class="entry-org">Masters' Union · Gurugram</div>
+          <ul class="entry-bullets">
+            <li>Comprehensive training across equity markets, derivatives, fixed income, commodities, and forex</li>
+            <li>Futures &amp; options strategies, risk management, portfolio construction, and trading psychology</li>
+            <li>Live market case studies and simulations using real-world market data</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-top">
+            <div class="entry-title">Advanced Valuation &amp; Financial Modelling</div>
+            <div class="entry-date">Jan – Apr 2026</div>
+          </div>
+          <div class="entry-org">The Valuation School</div>
+          <ul class="entry-bullets">
+            <li>DCF, Trading Comps, and Transaction Comps — full valuation suite</li>
+            <li>Integrated financial models: revenue, costs, working capital, and capex forecasting</li>
+            <li>Ratio analysis, peer benchmarking, and valuation narratives</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-top">
+            <div class="entry-title">Equity Research Fellowship</div>
+            <div class="entry-date">Feb – May 2026</div>
+          </div>
+          <div class="entry-org">The Valuation School</div>
+          <ul class="entry-bullets">
+            <li>Bottom-up stock ideation using fundamental analysis and sector research</li>
+            <li>Bull / base / bear case modelling with target price scenarios</li>
+            <li>Presenting data-backed investment recommendations to industry professionals</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-top">
+            <div class="entry-title">Python × Financial Data Analytics</div>
+            <div class="entry-date">Feb – Apr 2026</div>
+          </div>
+          <div class="entry-org">Grant Thornton Bharat</div>
+          <ul class="entry-bullets">
+            <li>Transforming raw financial data into actionable insights using Python</li>
+            <li>Trend and variance analysis, financial forecasting, and risk assessment</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-top">
+            <div class="entry-title">Bloomberg Terminal Training</div>
+            <div class="entry-date">Feb – Apr 2026</div>
+          </div>
+          <div class="entry-org">Bloomberg LP</div>
+          <ul class="entry-bullets">
+            <li>Real-time and historical market data retrieval and analysis</li>
+            <li>Macroeconomic indicators, sovereign yields, and global market tracking</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-tag">// Projects</span>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-title">Multibagger Challenge</div>
+            <span class="project-tag">Equity Research</span>
+          </div>
+          <div class="project-audience">★ Presented to Mr. Sanjiv Basan (Director, IIFL Securities) &amp; Mr. Nikhil Rungta (CIO, LIC MF)</div>
+          <ul class="entry-bullets">
+            <li>Screened 500+ small &amp; mid-cap stocks with PMS-style filters — quality, growth, capital efficiency, balance sheet strength</li>
+            <li>Shortlisted 4 high-conviction mid-caps across Renewables, Automotive, and Pharmaceuticals</li>
+            <li>Built investment theses with full fundamental analysis, ratio work, and sector tailwind mapping</li>
+          </ul>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-title">Portfolio Management Challenge</div>
+            <span class="project-tag">Portfolio Strategy</span>
+          </div>
+          <div class="project-audience">★ Presented to Mr. Paramjeet Singh Chopra (Founder, Trigen Wealth Management)</div>
+          <ul class="entry-bullets">
+            <li>Designed multi-asset allocation strategy aligned with defined risk profile and return objectives</li>
+            <li>Applied diversification, risk–return optimization, and drawdown management principles</li>
+            <li>Asset mix across equities, fixed income, and alternative instruments</li>
+          </ul>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-title">Contentpreneur Challenge — Finance Personal Brand</div>
+            <span class="project-tag">GTM Strategy</span>
+          </div>
+          <ul class="entry-bullets">
+            <li>Designed a go-to-market and monetization strategy for a finance education personal brand</li>
+            <li>Audience growth frameworks, content strategy, and creator economics roadmap</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <div class="sidebar">
+
+      <!-- STATS -->
+      <div class="sidebar-section">
+        <div class="section-header">
+          <span class="section-tag">// At a Glance</span>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Stocks Screened</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Courses &amp; Programs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Live Projects</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Industry Mentors</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="sidebar-section">
+        <div class="section-header">
+          <span class="section-tag">// Skills</span>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-label">Markets &amp; Research</div>
+          <div class="skill-chips">
+            <span class="chip highlight">Equity Research</span>
+            <span class="chip highlight">DCF Valuation</span>
+            <span class="chip">Trading Comps</span>
+            <span class="chip">F&amp;O Strategies</span>
+            <span class="chip">Technical Analysis</span>
+            <span class="chip">Fundamental Analysis</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-label">Modelling &amp; Analytics</div>
+          <div class="skill-chips">
+            <span class="chip highlight">Financial Modelling</span>
+            <span class="chip highlight">Python</span>
+            <span class="chip">Advanced Excel</span>
+            <span class="chip">SQL</span>
+            <span class="chip">Variance Analysis</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-label">Tools &amp; Platforms</div>
+          <div class="skill-chips">
+            <span class="chip highlight">Bloomberg Terminal</span>
+            <span class="chip">TradingView</span>
+            <span class="chip">Power BI</span>
+            <span class="chip">Tableau</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CERTIFICATIONS -->
+      <div class="sidebar-section">
+        <div class="section-header">
+          <span class="section-tag">// Certifications</span>
+        </div>
+
+        <div class="sidebar-entry">
+          <div class="sidebar-entry-title">Bloomberg Terminal</div>
+          <div class="sidebar-entry-sub">Bloomberg LP</div>
+          <div class="sidebar-entry-date">Feb – Apr 2026</div>
+        </div>
+
+        <div class="sidebar-entry">
+          <div class="sidebar-entry-title">Adv. Valuation &amp; Financial Modelling</div>
+          <div class="sidebar-entry-sub">The Valuation School</div>
+          <div class="sidebar-entry-date">Jan – Apr 2026</div>
+        </div>
+
+        <div class="sidebar-entry">
+          <div class="sidebar-entry-title">Python × Financial Data Analytics</div>
+          <div class="sidebar-entry-sub">Grant Thornton Bharat</div>
+          <div class="sidebar-entry-date">Feb – Apr 2026</div>
+        </div>
+
+        <div class="sidebar-entry">
+          <div class="sidebar-entry-title">Equity Research Fellowship</div>
+          <div class="sidebar-entry-sub">The Valuation School</div>
+          <div class="sidebar-entry-date">Feb – May 2026</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--panel-border); display: flex; justify-content: space-between; align-items: center;">
+    <span style="font-family: 'Space Mono', monospace; font-size: 10px; color: var(--text-dim); letter-spacing: 1px;">SHUBH GOEL · RESUME · 2026</span>
+    <span style="font-family: 'Space Mono', monospace; font-size: 10px; color: var(--text-dim);">connect.shubhgoel@gmail.com</span>
+  </div>
+
+</div>
+</body>
+</html>
